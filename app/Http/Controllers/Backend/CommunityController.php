@@ -60,9 +60,9 @@ class CommunityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Community $community)
     {
-        //
+        return Inertia::render('Communities/Edit', compact('community'));
     }
 
     /**
@@ -72,9 +72,10 @@ class CommunityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CommnunityStoreRequest $request, Community $community)
     {
-        //
+        $community->update($request->validated());
+        return to_route('communities.index');
     }
 
     /**
