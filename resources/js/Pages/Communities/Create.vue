@@ -63,8 +63,8 @@ defineProps({
 
 const form = useForm({
     name: '',
-    slug: '',
     description: '',
+    slug: '',
     
 });
 

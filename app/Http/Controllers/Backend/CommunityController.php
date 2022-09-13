@@ -17,7 +17,8 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        return 'ok';
+        $communities = Community::all();
+        return Inertia::render('Communities/Index', compact('communities'));
     }
 
     /**
@@ -27,7 +28,7 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        return Inertia::render(component:'Communities/Create');
+        return Inertia::render('Communities/Create');
     }
 
     /**
@@ -38,8 +39,8 @@ class CommunityController extends Controller
      */
     public function store(CommnunityStoreRequest $request)
     {
-        Community::create($request->validate() + ['user_id' => auth()->id()]);
-        return to_route(route: 'communities.index');
+        Community::create($request->validated() + ['user_id' => auth()->id()]);
+        return to_route('communities.index')->with('message', 'Community created successfully.');
     }
 
     /**
